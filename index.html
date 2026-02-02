@@ -7,7 +7,7 @@
     <title>CV_Nguyen_Quoc_Dat_Backend_Engineer</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
@@ -17,6 +17,7 @@
             /* Slate 700 */
             --accent-color: #2563eb;
             /* Blue 600 */
+            --accent-light: #3b82f6;
             --bg-color: #f8fafc;
             /* Slate 50 */
             --text-color: #334155;
@@ -25,17 +26,24 @@
             /* Slate 800 */
             --sidebar-text: #e2e8f0;
             /* Slate 200 */
+            --gradient-start: #1e293b;
+            --gradient-end: #0f172a;
+        }
+
+        * {
+            box-sizing: border-box;
         }
 
         body {
             font-family: 'Inter', sans-serif;
-            background: #e2e8f0;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: var(--text-color);
             margin: 0;
             padding: 20px;
             font-size: 14px;
             line-height: 1.5;
             -webkit-print-color-adjust: exact;
+            min-height: 100vh;
         }
 
         .cv-container {
@@ -46,106 +54,244 @@
             display: grid;
             grid-template-columns: 32% 68%;
             /* 2-column layout */
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            border-radius: 8px;
+            overflow: hidden;
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
         }
 
         /* --- Sidebar (Left Column) --- */
         .sidebar {
-            background: var(--sidebar-bg);
+            background: linear-gradient(180deg, var(--gradient-start) 0%, var(--gradient-end) 100%);
             color: var(--sidebar-text);
             padding: 30px 25px;
+            animation: slideInLeft 0.6s ease-out;
+        }
+
+        .avatar-container {
+            position: relative;
+            width: 130px;
+            height: 130px;
+            margin: 0 auto 20px;
         }
 
         .avatar-placeholder {
-            width: 120px;
-            height: 120px;
-            background: #cbd5e1;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
             border-radius: 50%;
-            margin: 0 auto 20px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 40px;
-            color: var(--secondary-color);
-            border: 3px solid var(--accent-color);
+            font-size: 45px;
+            color: white;
+            border: 4px solid var(--accent-color);
+            box-shadow: 0 0 20px rgba(37, 99, 235, 0.4);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .avatar-placeholder:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 30px rgba(37, 99, 235, 0.6);
+        }
+
+        .status-badge {
+            position: absolute;
+            bottom: 5px;
+            right: 5px;
+            width: 20px;
+            height: 20px;
+            background: #22c55e;
+            border-radius: 50%;
+            border: 3px solid var(--sidebar-bg);
+            animation: pulse 2s infinite;
         }
 
         .sidebar h2 {
             color: var(--white);
-            font-size: 16px;
+            font-size: 14px;
             text-transform: uppercase;
-            letter-spacing: 1px;
-            border-bottom: 1px solid var(--secondary-color);
+            letter-spacing: 2px;
+            border-bottom: 2px solid var(--accent-color);
             padding-bottom: 10px;
-            margin-top: 30px;
-            margin-bottom: 20px;
+            margin-top: 25px;
+            margin-bottom: 18px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .sidebar h2 i {
+            color: var(--accent-light);
+            font-size: 14px;
         }
 
         .contact-info div {
-            margin-bottom: 15px;
+            margin-bottom: 12px;
             display: flex;
             align-items: center;
             word-break: break-all;
+            transition: transform 0.2s ease;
+        }
+
+        .contact-info div:hover {
+            transform: translateX(5px);
         }
 
         .contact-info i {
-            width: 20px;
+            width: 28px;
+            height: 28px;
             margin-right: 10px;
-            color: var(--accent-color);
+            color: var(--white);
+            background: var(--accent-color);
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            flex-shrink: 0;
         }
 
         .contact-info a {
             color: var(--sidebar-text);
             text-decoration: none;
+            transition: color 0.2s ease;
+        }
+
+        .contact-info a:hover {
+            color: var(--accent-light);
         }
 
         .skill-tags {
             display: flex;
             flex-wrap: wrap;
-            gap: 8px;
+            gap: 6px;
         }
 
         .tag {
-            background: #334155;
+            background: rgba(51, 65, 85, 0.8);
             color: #fff;
-            padding: 4px 8px;
-            border-radius: 4px;
-            font-size: 12px;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 11px;
             font-weight: 500;
+            transition: all 0.3s ease;
+            border: 1px solid transparent;
+        }
+
+        .tag:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
         }
 
         .tag.highlight {
-            background: var(--accent-color);
+            background: linear-gradient(135deg, var(--accent-color) 0%, #8b5cf6 100%);
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .tag.secondary {
+            background: rgba(71, 85, 105, 0.6);
         }
 
         .education-item {
-            margin-bottom: 20px;
+            margin-bottom: 18px;
+            padding-left: 15px;
+            border-left: 2px solid var(--accent-color);
+            transition: border-color 0.3s ease;
+        }
+
+        .education-item:hover {
+            border-left-color: var(--accent-light);
         }
 
         .education-degree {
             font-weight: 600;
             color: var(--white);
             display: block;
+            font-size: 13px;
         }
 
         .education-school {
-            font-size: 13px;
+            font-size: 12px;
             color: #94a3b8;
         }
 
         .education-year {
-            font-size: 12px;
+            font-size: 11px;
             font-style: italic;
             color: #64748b;
         }
 
+        /* Language Section */
+        .language-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+            padding: 8px 12px;
+            background: rgba(51, 65, 85, 0.4);
+            border-radius: 8px;
+            transition: background 0.3s ease;
+        }
+
+        .language-item:hover {
+            background: rgba(51, 65, 85, 0.6);
+        }
+
+        .language-name {
+            font-weight: 500;
+            color: var(--white);
+        }
+
+        .language-level {
+            font-size: 11px;
+            color: #94a3b8;
+            background: var(--accent-color);
+            padding: 2px 8px;
+            border-radius: 10px;
+        }
+
         /* --- Main Content (Right Column) --- */
         .main-content {
-            padding: 40px 40px;
+            padding: 35px 40px;
+            animation: fadeIn 0.8s ease-out 0.2s both;
         }
 
         .header-name {
-            margin-bottom: 30px;
+            margin-bottom: 25px;
+            position: relative;
         }
 
         .header-name h1 {
@@ -154,97 +300,170 @@
             margin: 0;
             font-weight: 800;
             letter-spacing: -0.5px;
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--accent-color) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
         .header-name .job-title {
             color: var(--accent-color);
-            font-size: 18px;
+            font-size: 16px;
             font-weight: 600;
             margin-top: 5px;
             text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .availability-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            margin-top: 10px;
+            padding: 6px 14px;
+            background: linear-gradient(135deg, #dcfce7 0%, #bbf7d0 100%);
+            color: #166534;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .availability-badge .dot {
+            width: 8px;
+            height: 8px;
+            background: #22c55e;
+            border-radius: 50%;
+            animation: pulse 2s infinite;
         }
 
         .section {
-            margin-bottom: 30px;
+            margin-bottom: 25px;
         }
 
         .section-title {
             color: var(--primary-color);
-            font-size: 18px;
+            font-size: 16px;
             font-weight: 700;
             text-transform: uppercase;
             border-bottom: 2px solid #e2e8f0;
             padding-bottom: 8px;
-            margin-bottom: 20px;
+            margin-bottom: 18px;
             display: flex;
             align-items: center;
+            letter-spacing: 0.5px;
         }
 
         .section-title i {
             margin-right: 10px;
             color: var(--accent-color);
+            font-size: 16px;
         }
 
         .summary-text {
             color: var(--secondary-color);
             font-style: italic;
-            border-left: 3px solid var(--accent-color);
-            padding-left: 15px;
+            border-left: 4px solid var(--accent-color);
+            padding: 12px 15px;
             margin: 0;
+            background: linear-gradient(90deg, rgba(37, 99, 235, 0.05) 0%, transparent 100%);
+            border-radius: 0 8px 8px 0;
+            font-size: 13px;
         }
 
         .experience-item {
-            margin-bottom: 25px;
+            margin-bottom: 22px;
+            padding-left: 18px;
+            border-left: 2px solid #e2e8f0;
+            transition: border-color 0.3s ease;
+        }
+
+        .experience-item:hover {
+            border-left-color: var(--accent-color);
         }
 
         .exp-header {
             display: flex;
             justify-content: space-between;
             align-items: baseline;
-            margin-bottom: 5px;
+            margin-bottom: 4px;
         }
 
         .exp-role {
-            font-size: 16px;
+            font-size: 15px;
             font-weight: 700;
             color: var(--primary-color);
         }
 
         .exp-company {
             font-weight: 600;
-            color: var(--secondary-color);
+            color: var(--accent-color);
+            font-size: 13px;
         }
 
         .exp-date {
-            font-size: 13px;
+            font-size: 12px;
             color: #64748b;
             font-weight: 500;
+            background: #f1f5f9;
+            padding: 2px 10px;
+            border-radius: 12px;
         }
 
         .exp-details {
             margin-top: 8px;
             padding-left: 18px;
+            font-size: 13px;
         }
 
         .exp-details li {
-            margin-bottom: 6px;
+            margin-bottom: 5px;
         }
 
         .project-item {
-            margin-bottom: 20px;
+            margin-bottom: 18px;
+            padding: 12px 15px;
+            background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+            border-radius: 8px;
+            border-left: 3px solid var(--accent-color);
+            transition: all 0.3s ease;
+        }
+
+        .project-item:hover {
+            transform: translateX(5px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
         }
 
         .project-title {
             font-weight: 700;
             color: var(--primary-color);
-            font-size: 15px;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .project-title a {
+            color: var(--accent-color);
+            font-size: 12px;
         }
 
         .project-tech {
-            font-size: 12px;
+            font-size: 11px;
             color: var(--accent-color);
             font-weight: 600;
-            margin-bottom: 5px;
+            margin-bottom: 6px;
+            margin-top: 4px;
+        }
+
+        .metric {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--accent-color) 0%, #8b5cf6 100%);
+            color: white;
+            padding: 1px 8px;
+            border-radius: 10px;
+            font-size: 11px;
+            font-weight: 600;
+            margin-left: 4px;
         }
 
         /* Print Optimization */
@@ -258,11 +477,42 @@
                 box-shadow: none;
                 width: 100%;
                 max-width: none;
+                border-radius: 0;
+                animation: none;
             }
 
             .sidebar {
                 -webkit-print-color-adjust: exact;
                 background: var(--sidebar-bg) !important;
+                animation: none;
+            }
+
+            .main-content {
+                animation: none;
+            }
+
+            .tag:hover,
+            .project-item:hover,
+            .experience-item:hover,
+            .education-item:hover,
+            .contact-info div:hover {
+                transform: none;
+                box-shadow: none;
+            }
+
+            .status-badge {
+                animation: none;
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 800px) {
+            .cv-container {
+                grid-template-columns: 1fr;
+            }
+            
+            body {
+                padding: 10px;
             }
         }
     </style>
@@ -273,72 +523,94 @@
     <div class="cv-container">
         <!-- Sidebar -->
         <aside class="sidebar">
-            <div class="avatar-placeholder">
-                <i class="fa-solid fa-user"></i>
+            <div class="avatar-container">
+                <div class="avatar-placeholder">
+                    <i class="fa-solid fa-code"></i>
+                </div>
+                <div class="status-badge" title="Sẵn sàng nhận việc"></div>
             </div>
 
             <div class="contact-info">
-                <h2>Liên Hệ</h2>
-                <div><i class="fa-solid fa-envelope"></i> <a href="mailto:qdatvirgo@gmail.com">qdatvirgo@gmail.com</a>
-                </div>
-                <div><i class="fa-solid fa-phone"></i> 0989402893</div>
+                <h2><i class="fa-solid fa-address-card"></i> Liên Hệ</h2>
+                <div><i class="fa-solid fa-envelope"></i> <a href="mailto:qdatvirgo@gmail.com">qdatvirgo@gmail.com</a></div>
+                <div><i class="fa-solid fa-phone"></i> 0989 402 893</div>
                 <div><i class="fa-solid fa-location-dot"></i> Hà Nội, Việt Nam</div>
-                <!-- Add LinkedIn/Github here if available -->
-                <!-- <div><i class="fa-brands fa-github"></i> github.com/yourusername</div> -->
+                <div><i class="fa-brands fa-github"></i> <a href="https://github.com/qdatvirgo" target="_blank">github.com/qdatvirgo</a></div>
             </div>
 
             <div class="skills">
-                <h2>Kỹ Năng</h2>
+                <h2><i class="fa-solid fa-code"></i> Kỹ Năng</h2>
 
                 <div style="margin-bottom: 15px;">
-                    <strong style="color:white; display:block; margin-bottom:8px; font-size:13px;">Backend &
+                    <strong style="color:white; display:block; margin-bottom:8px; font-size:12px;">Backend &
                         Core</strong>
                     <div class="skill-tags">
                         <span class="tag highlight">Node.js (Expert)</span>
                         <span class="tag">TypeScript</span>
-                        <span class="tag" style="background: #475569;">Java/Golang (Basic)</span>
                         <span class="tag">Microservices</span>
                         <span class="tag">RESTful API</span>
-                        <span class="tag">gRPC (Research)</span>
+                        <span class="tag">Prisma ORM</span>
+                        <span class="tag">Docker/CI-CD</span>
+                        <span class="tag">Event-driven</span>
                     </div>
                 </div>
 
                 <div style="margin-bottom: 15px;">
-                    <strong style="color:white; display:block; margin-bottom:8px; font-size:13px;">Database &
+                    <strong style="color:white; display:block; margin-bottom:8px; font-size:12px;">Database &
                         DevOps</strong>
                     <div class="skill-tags">
-                        <span class="tag">MySQL</span>
+                        <span class="tag">MySQL/PostgreSQL</span>
                         <span class="tag">MongoDB</span>
                         <span class="tag highlight">Redis</span>
                         <span class="tag">Docker/CI-CD</span>
                         <span class="tag">Linux</span>
-                        <span class="tag">Security (OWASP)</span>
+                        <span class="tag">OWASP</span>
                     </div>
                 </div>
 
                 <div style="margin-bottom: 15px;">
-                    <strong style="color:white; display:block; margin-bottom:8px; font-size:13px;">Frontend &
+                    <strong style="color:white; display:block; margin-bottom:8px; font-size:12px;">Frontend &
                         Testing</strong>
                     <div class="skill-tags">
-                        <span class="tag">ReactJS/Next.js</span>
-                        <span class="tag">Playwright (E2E)</span>
-                        <span class="tag">Jest/Unit Test</span>
-                        <span class="tag">Git</span>
+                        <span class="tag">React/Next.js</span>
+                        <span class="tag">Playwright</span>
+                        <span class="tag">Jest</span>
+                        <span class="tag">Prisma ORM</span>
                     </div>
                 </div>
             </div>
 
+            <div class="languages">
+                <h2><i class="fa-solid fa-globe"></i> Ngôn Ngữ</h2>
+                <div class="language-item">
+                    <span class="language-name">🇻🇳 Tiếng Việt</span>
+                    <span class="language-level">Bản ngữ</span>
+                </div>
+                <div class="language-item">
+                    <span class="language-name">🇬🇧 Tiếng Anh</span>
+                    <span class="language-level">Đọc/Viết</span>
+                </div>
+            </div>
+
             <div class="education">
-                <h2>Học Vấn</h2>
+                <h2><i class="fa-solid fa-graduation-cap"></i> Học Vấn</h2>
                 <div class="education-item">
                     <span class="education-degree">CNTT (Cử nhân)</span>
-                    <span class="education-school">Đại học Kinh Tế - Kỹ Thuật Công Nghiệp</span>
+                    <span class="education-school">ĐH Kinh Tế - Kỹ Thuật CN</span>
                     <span class="education-year">2011 – 2015</span>
                 </div>
                 <div class="education-item">
                     <span class="education-degree">Vật lý Kỹ thuật</span>
-                    <span class="education-school">Đại học Bách Khoa Hà Nội</span>
+                    <span class="education-school">ĐH Bách Khoa Hà Nội</span>
                     <span class="education-year">2008 – 2011</span>
+                </div>
+            </div>
+
+            <div class="certificates">
+                <h2><i class="fa-solid fa-certificate"></i> Chứng Chỉ</h2>
+                <div class="skill-tags">
+                    <span class="tag">Docker Essentials</span>
+                    <span class="tag">AWS Fundamentals</span>
                 </div>
             </div>
         </aside>
@@ -348,18 +620,18 @@
             <header class="header-name">
                 <h1>NGUYỄN QUỐC ĐẠT</h1>
                 <div class="job-title">Senior Backend / Fullstack Engineer</div>
+                <div class="availability-badge">
+                    <span class="dot"></span>
+                    Sẵn sàng nhận việc
+                </div>
             </header>
 
             <section class="section">
-                <!-- <h3 class="section-title"><i class="fa-solid fa-user-tie"></i> Hồ Sơ Năng Lực</h3> -->
                 <p class="summary-text">
-                    Senior Backend Developer với 6+ năm kinh nghiệm chuyên xây dựng các <strong>Internal Tools</strong>
+                    Senior Backend Developer với <strong>6+ năm kinh nghiệm</strong> chuyên xây dựng các <strong>Internal Tools</strong>
                     và hệ thống <strong>SaaS</strong> phục vụ nhiều khách hàng.
-                    <br><br>
-                    Thế mạnh cốt lõi là <strong>Node.js (Express), MySQL</strong> xử lý logic phức tạp.
-                    Có kinh nghiệm tích hợp với các hệ thống Web CMS (Laravel) và phát triển các tool Frontend hiện đại
-                    sử dụng <strong>Next.js, Prisma</strong>.
-                    Thành thạo quy trình triển khai ứng dụng (Deployment) với <strong>Docker</strong>.
+                    Thế mạnh cốt lõi là <strong>Node.js (Express), MySQL/PostgreSQL</strong> xử lý logic phức tạp.
+                    Thành thạo <strong>Next.js, Prisma ORM</strong> và triển khai ứng dụng với <strong>Docker</strong>.
                 </p>
             </section>
 
@@ -369,58 +641,21 @@
                 <div class="experience-item">
                     <div class="exp-header">
                         <span class="exp-role">Senior Web Developer (Backend Lead)</span>
-                        <span class="exp-date">10/2018 – Hiện tại</span>
+                        <span class="exp-date">10/2018 – Nay</span>
                     </div>
                     <div class="exp-company">VCCORP</div>
                     <ul class="exp-details">
-                        <li style="margin-bottom: 15px;">
-                            <strong>Hệ thống Booking & Đăng tin bài (CMS):</strong>
-                            <div class="project-tech">Stack: Node.js, Express, MySQL, Redis</div>
-                            <ul style="padding-left: 15px; margin-top: 5px;">
-                                <li>Thiết kế <strong>Database Schema</strong> phức tạp tối ưu cho việc truy xuất và báo
-                                    cáo trên tập dữ liệu lớn.</li>
-                                <li>Giải quyết bài toán <strong>Race Condition</strong> trong quản lý inventory (đặt
-                                    chỗ) bằng Transaction và Row/Table Locking.</li>
-                                <li>Triển khai <strong>Distributed Caching (Redis)</strong> giúp giảm tải đáng kể cho
-                                    Database khi gặp spike traffic.</li>
-                                <li>Triển khai <strong>Security Best Practices</strong>: Rate-limiting, Input Validation
-                                    (chống SQL Injection/XSS) và bảo mật API.</li>
-                            </ul>
-                        </li>
-                        <li style="margin-bottom: 15px;">
-                            <strong>Nền tảng Sự kiện Ảo (Hybrid Event):</strong>
-                            <div class="project-tech">Stack: Node.js (Socket.io), Laravel, Python (AI Wrapper)</div>
-                            <ul style="padding-left: 15px; margin-top: 5px;">
-                                <li>Xây dựng kiến trúc <strong>Event-driven</strong> với Socket.io Cluster để xử lý
-                                    realtime chat/notify cho lượng user đồng thời lớn.</li>
-                                <li>Viết service tích hợp <strong>AI Model (Face Recognition)</strong>: xử lý hàng loạt
-                                    ảnh upload và index vector để tìm kiếm cực nhanh.</li>
-                                <li>Tối ưu hóa Docker Image và quy trình <strong>CI/CD</strong> để deploy nhanh chóng
-                                    lên môi trường K8s/Swarm.</li>
-                            </ul>
-                        </li>
-                        <li style="margin-bottom: 15px;">
-                            <strong>Tool tạo Banner HTML5 (Mô phỏng Adobe Animate):</strong>
-                            <div class="project-tech">Stack: Angular, Anime.js, TypeScript</div>
-                            <ul style="padding-left: 15px; margin-top: 5px;">
-                                <li>Xử lý logic <strong>Timeline & Keyframe</strong> phức tạp trên Frontend (tương tự
-                                    trình biên tập video).</li>
-                                <li>Tối ưu hiệu năng render khi thao tác với hàng trăm layer DOM cùng lúc bằng kỹ thuật
-                                    <strong>Virtual Scrolling</strong> và quản lý change ref.
-                                </li>
-                                <li>Xây dựng cơ chế <strong>Export HTML</strong> tối giản (chỉ < 50kb) để chạy mượt trên
-                                        các thiết bị quảng cáo.</li>
-                            </ul>
+                        <li>
+                            <strong>Hệ thống Booking & CMS:</strong> Thiết kế Database Schema phức tạp, giải quyết <strong>Race Condition</strong> với Transaction/Locking. Triển khai <strong>Redis Caching</strong> giảm <span class="metric">40% DB load</span>
                         </li>
                         <li>
-                            <strong>Interactive Marketing Games (Gamification):</strong>
-                            <div class="project-tech">Stack: ReactJS, Canvas/PixiJS</div>
-                            <ul style="padding-left: 15px; margin-top: 5px;">
-                                <li>Sử dụng <strong>Game Loop</strong> và Canvas để vẽ hoạt cảnh 60fps mượt mà trên
-                                    mobile.</li>
-                                <li>Xử lý logic <strong>Anti-cheat</strong> phía backend để đảm bảo tính công bằng cho
-                                    sự kiện trúng thưởng.</li>
-                            </ul>
+                            <strong>Nền tảng Sự kiện Ảo:</strong> Kiến trúc Event-driven với Socket.io Cluster hỗ trợ <span class="metric">10k+ users</span> đồng thời. Tích hợp AI Face Recognition.
+                        </li>
+                        <li>
+                            <strong>Tool tạo Banner HTML5:</strong> Xử lý Timeline/Keyframe phức tạp, tối ưu DOM với Virtual Scrolling. Export HTML chỉ <span class="metric">&lt;50kb</span>
+                        </li>
+                        <li>
+                            <strong>Interactive Marketing Games:</strong> Game Loop với Canvas/PixiJS chạy 60fps trên mobile. Xây dựng logic Anti-cheat backend.
                         </li>
                     </ul>
                 </div>
@@ -432,39 +667,52 @@
                     </div>
                     <div class="exp-company">CÔNG TY CÔNG NGHỆ MINH BẠCH</div>
                     <ul class="exp-details">
-                        <li>Phát triển hệ thống ERP quản lý Kho & Chuỗi cung ứng (SPA). Tối ưu hiển thị bảng dữ liệu lớn
-                            (Big Data Grid).</li>
-                        <!-- <li>Tối ưu UI Performance, giảm bundle size và implement các module phức tạp.</li> -->
+                        <li>Phát triển hệ thống ERP quản lý Kho & Chuỗi cung ứng (SPA). Tối ưu Big Data Grid display.</li>
                     </ul>
                 </div>
             </section>
 
             <section class="section">
-                <h3 class="section-title"><i class="fa-solid fa-rocket"></i> Dự Án Cá Nhân Tiêu Biểu</h3>
-                <p style="font-size: 13px; color: #64748b; margin-top: -15px; margin-bottom: 20px;">
-                    (Ứng dụng các công nghệ mới nhất về Fullstack, Cloud & AI)
+                <h3 class="section-title"><i class="fa-solid fa-rocket"></i> Dự Án Cá Nhân</h3>
+                <p style="font-size: 12px; color: #64748b; margin-top: -12px; margin-bottom: 15px;">
+                    Ứng dụng các công nghệ mới nhất về Fullstack, Cloud & AI
                 </p>
 
                 <div class="project-item">
-                    <div class="project-title">Flashhome - Nền tảng Tìm kiếm Nhà trọ Thông minh</div>
-                    <div class="project-tech">Tech: Next.js 16 (App Router), Supabase, Playwright, Leaflet Cluster</div>
-                    <ul class="exp-details">
-                        <li>Thiết kế hệ thống <strong>Fullstack hiện đại</strong>, tối ưu SEO và Performance (Server
-                            Actions, SSR).</li>
-                        <li>Triển khai quy trình <strong>Automated Testing (E2E) với Playwright</strong> để đảm bảo độ
-                            tin cậy của sản phẩm.</li>
-                        <li>Tối ưu trải nghiệm bản đồ (Map Clustering) xử lý hàng nghìn điểm dữ liệu mượt mà.</li>
+                    <div class="project-title">
+                        🏠 Flashhome - Nền tảng Tìm kiếm Nhà trọ
+                        <a href="https://github.com/qdatvirgo/nhatro" target="_blank"><i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                    </div>
+                    <div class="project-tech">Next.js 16 • Prisma 7 • PostgreSQL (Supabase) • Tailwind CSS 4 • Zustand</div>
+                    <ul class="exp-details" style="margin-top: 5px;">
+                        <li>Hệ thống Fullstack hiện đại với <strong>18 database models</strong>: Quản lý hợp đồng, hóa đơn, bảo trì.</li>
+                        <li>API đầy đủ cho CRUD, Search (30km radius), Authentication JWT, Role-based access.</li>
+                        <li>Map Clustering xử lý hàng nghìn điểm dữ liệu mượt mà với Leaflet.</li>
                     </ul>
                 </div>
 
                 <div class="project-item">
-                    <div class="project-title">Hệ sinh thái Dinh Dưỡng (Nutrition System)</div>
-                    <div class="project-tech">Tech: Node.js, Prisma ORM, MongoDB, Event-driven</div>
-                    <ul class="exp-details">
-                        <li>Xây dựng thuật toán tính toán khẩu phần cá nhân hóa.</li>
-                        <li>Thiết kế cơ sở dữ liệu linh hoạt với MongoDB và Prisma, đảm bảo tính mở rộng dễ dàng.</li>
-                        <li>Nghiên cứu áp dụng pattern <strong>Microservices & gRPC</strong> để tối ưu giao tiếp giữa
-                            các module (Auth, Calculation, User Profile).</li>
+                    <div class="project-title">
+                        🏥 Patient Management System
+                        <a href="https://github.com/qdatvirgo/benh-nhan" target="_blank"><i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                    </div>
+                    <div class="project-tech">Node.js • Express • Prisma • Dual DB (MySQL/PostgreSQL) • Playwright E2E</div>
+                    <ul class="exp-details" style="margin-top: 5px;">
+                        <li>Hệ thống quản lý bệnh nhân, kho thuốc, và thực phẩm với <strong>MVC architecture</strong>.</li>
+                        <li>Kiến trúc <strong>Dual Database</strong>: Switch linh hoạt giữa MySQL và PostgreSQL.</li>
+                        <li>Tích hợp <strong>Gemini AI, Telegram Bot</strong>, xuất báo cáo Excel/Word.</li>
+                    </ul>
+                </div>
+
+                <div class="project-item">
+                    <div class="project-title">
+                        🥗 Hệ thống Tư Vấn Dinh Dưỡng
+                        <a href="https://github.com/qdatvirgo/tu-van-dinh-duong" target="_blank"><i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                    </div>
+                    <div class="project-tech">Node.js • Express • EJS • Prisma • Zod • JWT/Passport</div>
+                    <ul class="exp-details" style="margin-top: 5px;">
+                        <li>Tư vấn dinh dưỡng cá nhân hóa, quản lý thuốc, thực phẩm, hồ sơ bệnh nhân.</li>
+                        <li>Scripts automation mạnh mẽ: Import/Export data, DB switching.</li>
                     </ul>
                 </div>
             </section>
