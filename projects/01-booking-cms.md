@@ -1,10 +1,10 @@
-# Hệ thống Booking & Đăng tin bài (CMS)
+# Tên hệ thống 
 
 ## 📋 Thông tin chung
 - **Công ty**: VCCORP
 - **Thời gian**: 2019 - Hiện tại
-- **Vai trò**: Backend Lead
-- **Team size**: (điền số người)
+- **Vai trò**: Developer
+- **Team size**: 4 người
 
 ## 🛠️ Tech Stack
 - Node.js, Express
